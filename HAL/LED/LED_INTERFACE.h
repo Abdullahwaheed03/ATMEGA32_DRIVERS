@@ -23,7 +23,8 @@ typedef enum
 typedef enum
 {
 	LED_OK,
-	LED_NOT_OK
+	LED_NOT_OK 
+	
 }LED_ERROR_TYPE;
 /**************************************************************************************/
 
