@@ -39,21 +39,43 @@ SWITCH_ERROR_TYPE SWITCH_ENUM_GET_STATE(SWITCH_CONFIG CONFIG , uint8 *STATE_CPY)
 {
 	SWITCH_ERROR_TYPE STATUS = SWITCH_OK ;
 	uint8 DATA ;
+	bool flag = FALSE ;
 	if (CONFIG.PORT <= PORTD && CONFIG.PIN <= PIN7 && CONFIG.CONNECTION <= EXT_PULLDOWN)
 	{
 		switch(CONFIG.CONNECTION)
 		{
 			case EXT_PULLUP ... INT_PULLUP :
 			{ 
+				
 				DIO_ENUM_GET_PIN_VAL(CONFIG.PORT,CONFIG.PIN,&DATA) ;
-			    if ( DATA == 1 )  *STATE_CPY = NOT_PRESSED ;
-				else if ( DATA == 0 ) *STATE_CPY = PRESSED ;
+				
+				while(DATA ==  0)
+				{
+					flag = TRUE ;
+					DIO_ENUM_GET_PIN_VAL(CONFIG.PORT,CONFIG.PIN,&DATA) ;
+				}
+				if (flag == TRUE)
+				{
+					*STATE_CPY = PRESSED ;
+					flag = FALSE ;
+				}
+				else if ( flag == FALSE  ) *STATE_CPY = NOT_PRESSED ;
 			}break;
 			case EXT_PULLDOWN :
 			{
 				DIO_ENUM_GET_PIN_VAL(CONFIG.PORT,CONFIG.PIN,&DATA) ;
-				if ( DATA == 0 )  *STATE_CPY = NOT_PRESSED ;
-				else if ( DATA == 1 ) *STATE_CPY = PRESSED ;
+				
+				while(DATA ==  1)
+				{
+					flag = TRUE ;
+					DIO_ENUM_GET_PIN_VAL(CONFIG.PORT,CONFIG.PIN,&DATA) ;
+				}
+				if (flag == TRUE)
+				{
+					*STATE_CPY = PRESSED ;
+					flag = FALSE ;
+				}
+				else if ( flag == FALSE  ) *STATE_CPY = NOT_PRESSED ;
 			}break;
 			
 		}

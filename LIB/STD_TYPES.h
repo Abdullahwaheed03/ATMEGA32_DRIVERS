@@ -28,7 +28,11 @@ typedef signed long long    sint64  ;
 typedef  float              float32 ;
 typedef  double             float64 ;
 
-
+typedef enum 
+{
+	FALSE,
+	TRUE 
+	}bool;
 #define NULL_PTR   ((void*)0)
 
 
