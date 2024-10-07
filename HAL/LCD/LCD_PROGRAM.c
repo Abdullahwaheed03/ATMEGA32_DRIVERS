@@ -1,9 +1,41 @@
-/*
- * LCD_PROGRAM.c
- *
- * Created: 10/1/2024 11:27:19 PM
- *  Author: Eng_A
- */ 
+/**********************************************************************/
+/**************** @ AUTHOR : Abdullah waheed  @ ***********************/
+/**************** @ DATE   :  7- 10 - 2023    @ ***********************/
+/**************** @ FILE   : LCD_PROGRAM.c    @ ***********************/
+/**************** @ BRIEF  : LCD LIB SRC CODE @ ***********************/
+/********************************************1*************************/
+
+
+
+/******************** HOW LCD WORKS   8 BIT MODE ****************/  /******************** HOW LCD WORKS   4 BIT MODE ****************/
+/*  YOU HAVE TWO OPTIONS                                                                       YOU HAVE TWO OPTIONS   
+                                                 
+  1-  SEND COMMAND                                                                                1-  SEND COMMAND 
+  2-  SEND DATA 														                          2-  SEND DATA 
+  
+  FIRSTLY TO SEND COMMANDS YOU HAVE TO FOLLOW THIS 						    FIRSTLY TO SEND COMMANDS YOU HAVE TO FOLLOW THIS
+  1-   SEND COMMAND ON DATA PORT 											                        1-   SEND  MSBS FROM COMMAND ON DATA PINS 
+  2-   REST RS PIN 															                        2-   REST RS PIN 
+  3-   SET  EN PIN																                    3-   SET  EN PIN
+  4-   WAIT FOR SMALL DELAY 100US TO 1MS										                    4-   WAIT FOR SMALL DELAY 100US TO 1MS
+  5-   RESET EN PIN																	                5-   RESET EN PIN
+  6-   WAIT FOR SMALL DELAY 100US TO 1MS												            6-   SEND  LSBS FROM COMMAND ON DATA PINS
+  																						            7-   SET  EN PIN
+									  															    8-   RESET EN PIN
+									  													   
+  AFTER INIT LCD  TO SEND DATA FOLLOW THIS                                                       AFTER INIT LCD  TO SEND DATA FOLLOW THIS 
+  			                             														    1-   SEND  MSBS FROM DATA ON DATA PINS
+   1-   SEND DATA ON DATA PORT																		2-   SET RS PIN 
+   2-   SET RS PIN																				    3-   SET  EN PIN
+   3-   SET  EN PIN																				    4-   WAIT FOR SMALL DELAY 100US TO 1MS
+   4-   WAIT FOR SMALL DELAY 100US TO 1MS														    5-   RESET EN PIN
+   5-   RESET EN PIN																			    6-   SEND  MSBS FROM DATA ON DATA PINS
+   6-   WAIT FOR SMALL DELAY 100US TO 1MS															7-   SET  EN PIN
+   																								    8-   RESET EN PIN
+   
+   
+  
+   /*************************************************************/
 
 
 #include "HAL/LCD/LCD_INTERFACE.h"
@@ -202,11 +234,3 @@ LCD_ERROR LCD_CLEAR(LCD_CONFIG LCD)
 		LCD_CMD(LCD,LCD_CLR);
 	}
 
-
-/*
-
-LCD_ERROR LCD_SEND_CUST_CHARS(void)
-{
-	
-}
-*/
