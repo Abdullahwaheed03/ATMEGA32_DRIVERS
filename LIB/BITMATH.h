@@ -8,7 +8,7 @@
 
 #ifndef BITMATH_H_
 #define BITMATH_H_
-
+#include "LIB/STD_TYPES.h"
 
 #define REGISTER_SIZE 8
 

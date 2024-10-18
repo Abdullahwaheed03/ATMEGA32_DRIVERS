@@ -64,7 +64,7 @@ typedef enum
 
 typedef enum
 {
-	LOW,
+	LOW = 0,
 	HIGH
 }VALUES;
 
